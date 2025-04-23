@@ -55,8 +55,13 @@ export default function RegisterPage() {
       toast.success("Тіркеу сәтті өтті!");
 
       router.push(user.role === "TEACHER" ? "/teacher" : "/student");
-    } catch (err: any) {
-      toast.error(err.response?.data?.message || "Тіркеу қатесі");
+    } catch (err: unknown) {
+      const errorMessage =
+        axios.isAxiosError(err) && err.response?.data?.message
+          ? err.response.data.message
+          : "Тіркеу қатесі";
+
+      toast.error(errorMessage);
     } finally {
       setIsLoading(false);
     }
@@ -125,10 +130,14 @@ export default function RegisterPage() {
                 <Label htmlFor="role">Рөлі</Label>
                 <Select
                   value={role}
-                  onValueChange={(value) => setRole(value as "STUDENT" | "TEACHER")}
+                  onValueChange={(value) =>
+                    setRole(value as "STUDENT" | "TEACHER")
+                  }
                 >
                   <SelectTrigger>
-                    <SelectValue>{role === "STUDENT" ? "Оқушы" : "Мұғалім"}</SelectValue>
+                    <SelectValue>
+                      {role === "STUDENT" ? "Оқушы" : "Мұғалім"}
+                    </SelectValue>
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="STUDENT">Оқушы</SelectItem>

@@ -1,5 +1,5 @@
 import { AssignmentType } from '@prisma/client';
-import { IsEnum, IsNotEmpty, IsString, IsOptional } from 'class-validator';
+import { IsEnum, IsString, IsOptional } from 'class-validator';
 
 export class CreateAssignmentDto {
   @IsString()

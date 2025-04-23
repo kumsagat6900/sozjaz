@@ -33,8 +33,10 @@ export function useAuth() {
       setToken(storedToken)
       setRole(decoded.role)
     } catch (err) {
-      router.push('/login')
-    } finally {
+      console.error("JWT decode қатесі:", err);
+      router.push('/login');
+    }
+    finally {
       setLoaded(true)
     }
   }, [router])

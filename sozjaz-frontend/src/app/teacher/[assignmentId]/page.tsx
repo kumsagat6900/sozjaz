@@ -1,7 +1,7 @@
 // src/app/teacher/[assignmentId]/page.tsx
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import axios from "axios";
 import { useAuth } from "@/hooks/useAuth";
@@ -32,7 +32,7 @@ export default function CheckSubmissionsPage() {
   const [comments, setComments] = useState<{ [id: string]: string }>({});
   const [loading, setLoading] = useState(false);
 
-  const fetchSubmissions = async () => {
+  const fetchSubmissions = useCallback(async () => {
     try {
       const res = await axios.get(
         `http://localhost:3000/submissions/${assignmentId}`,
@@ -55,12 +55,12 @@ export default function CheckSubmissionsPage() {
       toast.error("Жауаптарды алу кезінде қате");
       console.error(err);
     }
-  };
+  }, [assignmentId, token]);
 
   useEffect(() => {
     if (!token || role !== "TEACHER") return;
     fetchSubmissions();
-  }, [token, role, assignmentId]);
+  }, [token, role, fetchSubmissions]);
 
   const handleSave = async (id: string) => {
     const grade = parseInt(grades[id] as string);

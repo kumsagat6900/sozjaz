@@ -1,7 +1,8 @@
-import type { NextConfig } from "next";
-
-const nextConfig: NextConfig = {
-  /* config options here */
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  output: 'export',
+  basePath: '/end_sozjaz-online', // Имя репозитория
+  trailingSlash: true,
 };
 
-export default nextConfig;
+module.exports = nextConfig;

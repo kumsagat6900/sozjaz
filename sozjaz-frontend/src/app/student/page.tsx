@@ -485,7 +485,8 @@ export default function StudentPage() {
       <Tabs
         defaultValue="ALL"
         className="w-full"
-        onValueChange={(v: "ALL" | "SUBMITTED" | "PENDING") => setFilter(v)}
+        onValueChange={(v) => setFilter(v as "ALL" | "SUBMITTED" | "PENDING")}
+
       >
         <TabsList className="grid grid-cols-3 mb-6">
           <TabsTrigger value="ALL">Барлығы</TabsTrigger>
