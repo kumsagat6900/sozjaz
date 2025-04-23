@@ -1,0 +1,62 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                 String       @id @default(uuid())
+  name               String
+  login              String       @unique
+  password           String
+  role               Role
+  assignments        Assignment[] @relation("CreatedAssignments")
+  submissions        Submission[]
+  studentAssignments Assignment[] @relation("StudentAssignments") // 👈 добавили это!
+  createdAt          DateTime     @default(now())
+}
+
+model Assignment {
+  id        String         @id @default(uuid())
+  title     String
+  type      AssignmentType
+  content   String
+  example   String? // 👈 Добавлено это поле!
+  createdAt DateTime       @default(now())
+
+  createdBy   User   @relation("CreatedAssignments", fields: [createdById], references: [id])
+  createdById String
+
+  student   User?   @relation("StudentAssignments", fields: [studentId], references: [id])
+  studentId String?
+
+  submissions Submission[]
+}
+
+model Submission {
+  id           String     @id @default(uuid())
+  content      String
+  student      User       @relation(fields: [studentId], references: [id])
+  studentId    String
+  assignment   Assignment @relation(fields: [assignmentId], references: [id])
+  assignmentId String
+  grade        Int?
+  comment      String?
+  createdAt    DateTime   @default(now())
+}
+
+enum Role {
+  STUDENT
+  TEACHER
+}
+
+enum AssignmentType {
+  AUDIO_DICTATION
+  AUDIO_SUMMARY
+  SYNONYM_REPLACE
+  OPEN_SPACE
+  WORD_GAME
+}
