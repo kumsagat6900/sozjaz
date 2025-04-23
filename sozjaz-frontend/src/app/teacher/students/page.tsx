@@ -8,7 +8,6 @@ import { useRouter } from "next/navigation";
 import { format } from "date-fns";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 
 interface Student {
   id: string;

@@ -21,7 +21,6 @@ import {
   CheckCircle,
   Upload,
   FileAudio,
-  Clock,
   CalendarDays,
 } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -130,7 +129,13 @@ export default function TeacherPage() {
       setType("AUDIO_DICTATION");
       setAssignments((prev) => [...prev, res.data]);
       setActiveTab("assignments");
-    } catch (err) {
+    } catch (err: unknown) {
+      if (axios.isAxiosError(err)) {
+        console.error("Axios error:", err.response?.data || err.message);
+      } else {
+        console.error("Unknown error:", err);
+      }
+    
       toast.error("Тапсырманы жасау қатесі", {
         description: "Қайталап көріңіз немесе әкімшіге хабарласыңыз",
       });
