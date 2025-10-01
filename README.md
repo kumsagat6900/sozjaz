@@ -23,7 +23,7 @@ IDE рекомендации, линтер, форматтер, commit messages,
 - CI/CD
 - Мониторинг, тестирование и т.д.
 
-<img width="452" height="282" alt="image" src="https://github.com/user-attachments/assets/9e2bf6fa-53dc-45ce-8a7f-7fd051b07948" />
+
 <img width="452" height="282" alt="image" src="https://github.com/user-attachments/assets/65ed76ae-eb11-4cb1-8e90-32325faac736" />
 <img width="452" height="282" alt="image" src="https://github.com/user-attachments/assets/bffb5531-0131-4ba8-9c89-c3df998e97ac" />
 <img width="452" height="282" alt="image" src="https://github.com/user-attachments/assets/b1464e17-da67-4566-9bf4-6c5857dae8b4" />
